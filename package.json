@@ -28,8 +28,9 @@
   },
   "browser": "dist/sqlite-parser.js",
   "scripts": {
-    "test": "grunt test",
-    "build": "grunt release"
+    "test": "vitest test/parser.test.js",
+    "build": "grunt release",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=4"
@@ -48,35 +49,14 @@
     "url": "https://github.com/applandinc/sqlite-parser/issues"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "babel-core": "^6.17.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.16.0",
-    "bluebird": "^3.4.6",
-    "chai": "^3.5.0",
-    "codemirror": "^5.19.0",
+    "@biomejs/biome": "^2.3.0",
     "glob": "^7.1.0",
-    "grunt": "^1.0.1",
-    "grunt-babel": "^6.0.0",
-    "grunt-banner": "^0.6.0",
-    "grunt-browserify": "^5.0.0",
-    "grunt-cli": "^1.2.0",
-    "grunt-concurrent": "^2.3.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-cssmin": "^1.0.2",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-replace": "^1.0.1",
-    "grunt-shell": "^2.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "load-grunt-tasks": "^3.5.2",
     "lodash": "^4.16.2",
-    "mocha": "^3.1.0",
     "pegjs": "git+https://github.com/nwronski/pegjs.git#master",
     "prettyjson": "^1.1.3",
-    "semantic-release": "^18.0.1"
+    "vitest": "^4.0.3"
   }
 }
