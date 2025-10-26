@@ -5,38 +5,19 @@ import { parse, SyntaxError as PegSyntaxError } from "./parser";
 import { Tracer } from "./tracer";
 import { SqliteParserTransform, SingleNodeTransform } from "./streaming";
 
-export default function sqliteParser(source, options, callback) {
-	const t = Tracer();
+export default function sqliteParser(source, options = {}) {
+	const tracer = Tracer();
 
-	if (arguments.length === 2) {
-		if (typeof options === "function") {
-			callback = options;
-			options = {};
-		}
+	const parseOpts = { tracer, startRule: "start" };
+
+	if (options.streaming) {
+		parseOpts.startRule = "start_streaming";
 	}
-	const isAsync = typeof callback === "function";
-	const opts = { tracer: t, startRule: "start" };
-	if (options && options.streaming) {
-		opts["startRule"] = "start_streaming";
-	}
-	if (isAsync) {
-		// Async
-		setTimeout(function () {
-			let result, err;
-			try {
-				result = parse(source, opts);
-			} catch (e) {
-				err = e instanceof PegSyntaxError ? t.smartError(e) : e;
-			}
-			callback(err, result);
-		}, 0);
-	} else {
-		// Sync
-		try {
-			return parse(source, opts);
-		} catch (e) {
-			throw e instanceof PegSyntaxError ? t.smartError(e) : e;
-		}
+
+	try {
+		return parse(source, opts);
+	} catch (err) {
+		throw e instanceof PegSyntaxError ? t.smartError(e) : e;
 	}
 }
 
