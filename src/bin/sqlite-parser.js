@@ -1,4 +1,4 @@
-import parser from "../index";
+import parser from "../index.js";
 import {
 	stat,
 	writeFile,

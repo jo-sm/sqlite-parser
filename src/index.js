@@ -1,9 +1,9 @@
 /**
  * sqlite-parser
  */
-import { parse, SyntaxError as PegSyntaxError } from "./parser";
-import { Tracer } from "./tracer";
-import { SqliteParserTransform, SingleNodeTransform } from "./streaming";
+import { parse, SyntaxError as PegSyntaxError } from "./parser.js";
+import { Tracer } from "./tracer.js";
+import { SqliteParserTransform, SingleNodeTransform } from "./streaming.js";
 
 export default function sqliteParser(source, options = {}) {
 	const tracer = Tracer();
@@ -15,19 +15,16 @@ export default function sqliteParser(source, options = {}) {
 	}
 
 	try {
-		return parse(source, opts);
+		return parse(source, parseOpts);
 	} catch (err) {
-		throw e instanceof PegSyntaxError ? t.smartError(e) : e;
+		throw err instanceof PegSyntaxError ? t.smartError(err) : err;
 	}
 }
 
-sqliteParser["createParser"] = function () {
+export function createParser() {
 	return new SqliteParserTransform();
-};
+}
 
-sqliteParser["createStitcher"] = function () {
+export function createStitcher() {
 	return new SingleNodeTransform();
-};
-
-sqliteParser["NAME"] = "sqlite-parser";
-sqliteParser["VERSION"] = "@@VERSION";
+}

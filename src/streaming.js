@@ -1,5 +1,5 @@
 import { Transform } from "stream";
-import parser from "./index";
+import parser from "./index.js";
 
 const NEXT_QUERY = /[^\;]+(\;)?/g;
 
