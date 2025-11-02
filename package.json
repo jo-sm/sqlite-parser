@@ -1,5 +1,6 @@
 {
-  "name": "@jo-sm/sql-parser",
+  "$schema": "https://www.schemastore.org/package.json",
+  "name": "@jo-sm/sqlite-parser",
   "description": "JavaScript implementation of SQLite 3 query parser",
   "author": "Joshua Smock",
   "version": "1.0.0",
@@ -40,5 +41,8 @@
   },
   "dependencies": {
     "peggy": "^5.0.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
