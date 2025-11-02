@@ -1,4 +1,4 @@
-import parser from "../lib/index";
+import parser from "../index";
 import {
 	stat,
 	writeFile,

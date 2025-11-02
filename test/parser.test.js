@@ -10,21 +10,16 @@ const grammar = (
 	await fs.readFile(`${import.meta.dirname}/../src/grammar.pegjs`)
 ).toString();
 
-const parser = peggy.generate(grammar);
-// These tests take too long with the current parser
-const ignored = [
-	"aggnested-1.sql",
-	"fuzz-oss1-1.sql",
-	"with1-1.sql",
-	"subquery-1.sql",
-];
+const parser = peggy.generate(grammar, {
+	allowedStartRules: ["start", "start_streaming"],
+	cache: true,
+});
 
 describe(`SQL parsing`, () => {
 	for (const file of allSqlFixtures) {
 		if (
 			file.isFile() &&
 			file.name.endsWith(".sql") &&
-			!ignored.includes(file.name) &&
 			// We specifically ignore these tests, they aren't really useful for us and take way too long
 			// to be parsed at the moment.
 			!file.name.startsWith("randexpr1")
